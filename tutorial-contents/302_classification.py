@@ -39,8 +39,10 @@ class Net(torch.nn.Module):
         x = self.out(x)
         return x
 
-net = Net(n_feature=2, n_hidden=10, n_output=2)     # define the network
+net = Net(n_feature=2, n_hidden=10, n_output=2)     # return a object of Net
 print(net)  # net architecture
+for i in net.parameters():
+    print(i)
 
 optimizer = torch.optim.SGD(net.parameters(), lr=0.02)
 loss_func = torch.nn.CrossEntropyLoss()  # the target label is NOT an one-hotted
@@ -65,6 +67,10 @@ for t in range(100):
         accuracy = float((pred_y == target_y).astype(int).sum()) / float(target_y.size)
         plt.text(1.5, -4, 'Accuracy=%.2f' % accuracy, fontdict={'size': 20, 'color':  'red'})
         plt.pause(0.1)
+
+for i in net.parameters():
+    print(i)
+
 
 plt.ioff()
 plt.show()
